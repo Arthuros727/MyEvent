@@ -53,7 +53,7 @@ function App() {
   }
 
   function display(){
-    window.location.href = "https://github.com/login?client_id=be5b6ff0e0d3921f86bf&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3Dbe5b6ff0e0d3921f86bf%26redirect_uri%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fauth%252Fgithub%252Fcallback%26response_type%3Dcode%26scope%3Duser%253Aemail%26state%3DwhJjczKKky0SSzc8gf9RasXBkAegbQRbKuNZwyCv";
+    window.location.href = "http://127.0.0.1:8000/login";
   }
 
   return (
@@ -83,7 +83,7 @@ function App() {
   
 
 {count.map((index) => (
-  <div>
+  <div className='map'>
 
     <p>event : {index.slug}</p>
     <img src={index.thumbnail}></img>
