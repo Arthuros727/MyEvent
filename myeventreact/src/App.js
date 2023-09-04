@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useContext, useState, useEffect } from "react";
+import Google from './google';
 function App() {
   const [count, setCount] = useState([]);
   const [input, setInput] = useState("");
@@ -52,14 +53,21 @@ function App() {
     // console.log(event.target.value);
   }
 
+  function display(){
+    document.getElementById("google").style.display= "block"
+  }
 
   return (
 <>
+<div className='google' id='google'>
+
+<Google></Google>
+</div>
 {/* <button onClick={data}>ok</button> */}
 <div className='head'>
 
   <p>Logo?</p>
-<button className='login'>Login</button>
+<button className='login' onClick={display}>Login</button>
 </div>
 <label>Location</label>
 <input onChange={handleChange} onKeyDown={() => location(input)}></input>

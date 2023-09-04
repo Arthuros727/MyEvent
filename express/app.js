@@ -1,12 +1,18 @@
-const express = require('express');
-
+const express = require("express");
 const app = express();
-const PORT = 3000;
+require("dotenv/config"); // configure reading from .env
+const cors = require("cors");
+const { OAuth2Client } = require("google-auth-library");
+const jwt = require("jsonwebtoken");
 
-app.listen(PORT, (error) =>{
-	if(!error)
-		console.log("Server is Successfully Running, and App is listening on port "+ PORT)
-	else
-		console.log("Error occurred, server can't start", error);
-	}
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+  })
 );
+app.use(express.json());
+
+let DB = [];
+
+app.listen("5152", () => console.log("Server running on port 5152"));
