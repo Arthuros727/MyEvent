@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useContext, useState, useEffect } from "react";
-import Google from './google';
 function App() {
   const [count, setCount] = useState([]);
   const [input, setInput] = useState("");
@@ -54,14 +53,13 @@ function App() {
   }
 
   function display(){
-    document.getElementById("google").style.display= "block"
+    window.location.href = "https://github.com/login?client_id=be5b6ff0e0d3921f86bf&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3Dbe5b6ff0e0d3921f86bf%26redirect_uri%3Dhttp%253A%252F%252F127.0.0.1%253A8000%252Fauth%252Fgithub%252Fcallback%26response_type%3Dcode%26scope%3Duser%253Aemail%26state%3DwhJjczKKky0SSzc8gf9RasXBkAegbQRbKuNZwyCv";
   }
 
   return (
 <>
 <div className='google' id='google'>
 
-<Google></Google>
 </div>
 {/* <button onClick={data}>ok</button> */}
 <div className='head'>
