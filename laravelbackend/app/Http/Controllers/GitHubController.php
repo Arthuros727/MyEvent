@@ -33,6 +33,8 @@ class GitHubController extends Controller
                     'github_id'=> $user->id,
                     'auth_type'=> 'github',
                     'password' => encrypt('gitpwd059')
+            
+                    
                 ]);
      
                 Auth::login($gitUser);
