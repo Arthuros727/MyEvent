@@ -9,7 +9,8 @@ function HomePage() {
   }
 
   useEffect(() => {
-     fetch("https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&limit=20")
+    //https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&limit=20
+     fetch("https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=*&lang=fr")
     .then(response => response.json())
     .then(response =>{
       console.log("ouiiiii",response.results  )
@@ -34,6 +35,7 @@ function HomePage() {
 
   function selection(input){
     // https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&where=location_city%20like%20%22${input}%22&limit=20
+    https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=longdescription_fr
     fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_name%2C%20description_fr&where=longdescription_fr%20like%20%22%25${input}%C3%25%22&limit=20`)
     .then(response => response.json())
     .then(response =>{
@@ -88,6 +90,7 @@ function HomePage() {
     <img src={index.thumbnail}></img>
     <p> {index.description_fr}</p>
     <p>location : {index.location_city}</p>
+    <div dangerouslySetInnerHTML={{__html: index.longdescription_fr}} />
   </div>
     ))}
     </div>
