@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
+Route::get('test', [UserController::class, 'getuser']);
 Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 Route::middleware([
     'auth:sanctum',

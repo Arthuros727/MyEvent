@@ -4,6 +4,7 @@ function HomePage() {
   const [count, setCount] = useState([]);
   const [input, setInput] = useState("");
   const [select, setSelect] = useState("");
+   const [user, setUser] = useState([]);
   async function data(){
   
   }
@@ -14,6 +15,16 @@ function HomePage() {
     .then(response =>{
       console.log("ouiiiii",response.results  )
       setCount(response.results)
+    } )
+  
+    .catch(error => console.log("Erreur : " + error));
+
+    fetch(`http://127.0.0.1:8000/test`)
+    .then(response => response.json())
+    .then(response =>{
+      console.log("ouiiiii",response)
+      setUser(response)
+      console.log(user)
     } )
   
     .catch(error => console.log("Erreur : " + error));
@@ -55,6 +66,11 @@ function HomePage() {
     window.location.href = "http://127.0.0.1:8000/login";
   }
 
+  function fetchuser(){
+    // https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&where=location_city%20like%20%22${input}%22&limit=20
+    document.getElementById("friends").style.display="block"
+  }
+
   return (
 <>
 <div className='google' id='google'>
@@ -64,7 +80,8 @@ function HomePage() {
 <div className='head'>
 
   <p>Logo?</p>
-<button className='login' onClick={display}>Login</button>
+  <button className='amis' onClick={fetchuser}>Amis</button>
+  <button className='login' onClick={display}>Login</button>
 </div>
 <label>Location</label>
 <input onChange={handleChange} onKeyDown={() => location(input)}></input>
@@ -78,7 +95,16 @@ function HomePage() {
   <option value="goldfish">Goldfish</option> */}
 </select>
 <div className='center'>
+<div className="friends" id="friends">
+<p>ALL USER :</p>
+{user.map((index) => (
+  <div className='map'>
 
+    <p>event : {index.name}</p>
+   
+  </div>
+    ))}
+</div>
   
 
 {count.map((index) => (
