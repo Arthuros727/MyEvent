@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 // use Auth;
 use Exception;
 use Socialite;
+// use Symfony\Component\Routing\Route;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,7 +18,7 @@ class UserController extends Controller
         return $user;
     }
 
-    public function addfriend(){
+    public function addfriend($id){
         // if (Auth::check()) {
             $user = Auth::user();
         // $user = User::find(1); 
@@ -25,11 +26,11 @@ class UserController extends Controller
         if ($user) {
             $currentFriends = $user->friends;
     
-            $newFriendId = 3;
+            $newFriendId = $id; 
             if (!in_array($newFriendId, explode(',', $currentFriends))) {
                 $currentFriends .= ',' . $newFriendId;
                 $user->update(['friends' => $currentFriends]);
             }
         }
-    
+        return redirect('http://localhost:3000/');
     }}

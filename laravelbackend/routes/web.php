@@ -20,7 +20,7 @@ Route::get('/', function () {
 });
 Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
 Route::get('test', [UserController::class, 'getuser']);
-Route::get('friend', [UserController::class, 'addfriend']);
+Route::get('friend/{id}', [UserController::class, 'addfriend']);
 Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 Route::middleware([
     'auth:sanctum',

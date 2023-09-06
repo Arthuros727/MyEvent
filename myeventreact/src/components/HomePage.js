@@ -1,10 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
+import { useCookies } from 'react-cookie';
 
 function HomePage() {
   const [count, setCount] = useState([]);
   const [input, setInput] = useState("");
   const [select, setSelect] = useState("");
    const [user, setUser] = useState([]);
+   const [cookies, setCookie] = useCookies(['name']);
   async function data(){
   
   }
@@ -71,6 +73,16 @@ function HomePage() {
     document.getElementById("friends").style.display="block"
   }
 
+  function addfriend(input){
+    // let expires = new Date()
+    // expires.setTime(expires.getTime() + (response.data.expires_in * 1000))
+    // setCookie('friend', input, { path: '/', expires })
+
+    setCookie('name', input);
+    window.location.href = `http://127.0.0.1:8000/friend/${input}`;
+    
+  }
+
   return (
 <>
 <div className='google' id='google'>
@@ -101,7 +113,7 @@ function HomePage() {
   <div className='map'>
 
     <p>{index.name}</p>
-    <button value={index.id}>add</button>
+    <button value={index.id} onClick={()=>addfriend(index.id)}>add</button>
    
   </div>
     ))}
