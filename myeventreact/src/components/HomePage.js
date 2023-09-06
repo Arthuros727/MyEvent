@@ -100,7 +100,8 @@ function HomePage() {
 {user.map((index) => (
   <div className='map'>
 
-    <p>event : {index.name}</p>
+    <p>{index.name}</p>
+    <button value={index.id}>add</button>
    
   </div>
     ))}

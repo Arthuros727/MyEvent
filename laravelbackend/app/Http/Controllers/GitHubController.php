@@ -6,6 +6,7 @@ use Exception;
 use Socialite;
 use App\Models\User;
 class GitHubController extends Controller
+
 {
     public function gitRedirect()
     {
@@ -39,7 +40,7 @@ class GitHubController extends Controller
      
                 Auth::login($gitUser);
       
-                return redirect('/dashboard');
+                return redirect('http://localhost:3000/');
             }
      
         } catch (Exception $e) {
