@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CreateSortieController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GitHubController;
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\GitHubController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/createSortie', [CreateSortieController::class, 'CreateSortie']);
+
 Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
 Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
 Route::middleware([

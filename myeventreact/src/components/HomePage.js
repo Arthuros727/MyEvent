@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
+// import Popup from "reactjs-popup";
 
 function HomePage() {
   const [count, setCount] = useState([]);
@@ -35,7 +36,6 @@ function HomePage() {
 
   function selection(input){
     // https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&where=location_city%20like%20%22${input}%22&limit=20
-    https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=longdescription_fr
     fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_name%2C%20description_fr&where=longdescription_fr%20like%20%22%25${input}%C3%25%22&limit=20`)
     .then(response => response.json())
     .then(response =>{
@@ -55,6 +55,14 @@ function HomePage() {
 
   function display(){
     window.location.href = "http://127.0.0.1:8000/login";
+  }
+
+  function popup(uid){
+    var btn = document.getElementById(uid);
+    // btn.setAttribute("hidden", "");
+    btn.removeAttribute("hidden");
+    console.log(uid);
+    // console.log('abricot');
   }
 
   return (
@@ -85,12 +93,31 @@ function HomePage() {
 
 {count.map((index) => (
   <div className='map'>
-
     <p>event : {index.slug}</p>
     <img src={index.thumbnail}></img>
     <p> {index.description_fr}</p>
     <p>location : {index.location_city}</p>
     <div dangerouslySetInnerHTML={{__html: index.longdescription_fr}} />
+    <button onClick={() => popup(index.uid)}>Créer une sortie</button>
+    <div id={index.uid} className="pop" hidden>
+      <form action="http://localhost:8000/createSortie" method="POST">
+        <label>Nom de la sortie :</label>
+        <input type='text' name='nom_sortie' className="form" required></input>
+
+        <label for="pet-select">visibility:</label>
+        <select name="visibility" className="form" required>
+          <option value="" disabled>--Choisissez la confidentialité--</option>
+          <option value="publique">Publique</option>
+          <option value="prive">Prive</option>
+        </select>
+
+        <input name="id_events" value={index.uid} hidden></input>
+        {/* <input name="id_creator" value={}></input> */}
+
+
+        <input type="submit" value="Créer la sortie" />
+      </form>
+    </div>
   </div>
     ))}
     </div>
