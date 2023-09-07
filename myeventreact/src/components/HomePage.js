@@ -57,12 +57,17 @@ function HomePage() {
     window.location.href = "http://127.0.0.1:8000/login";
   }
 
-  function popup(uid){
+  function openpopup(uid){
     var btn = document.getElementById(uid);
-    // btn.setAttribute("hidden", "");
     btn.removeAttribute("hidden");
-    console.log(uid);
-    // console.log('abricot');
+
+    // let iframe = document.getElementById('dummyframe');
+    // iframe.setAttribute("hidden", "");
+  }
+
+  function closepopup(uid){
+    var btn = document.getElementById(uid);
+    btn.setAttribute("hidden", "");
   }
 
   return (
@@ -98,13 +103,15 @@ function HomePage() {
     <p> {index.description_fr}</p>
     <p>location : {index.location_city}</p>
     <div dangerouslySetInnerHTML={{__html: index.longdescription_fr}} />
-    <button onClick={() => popup(index.uid)}>Créer une sortie</button>
+    <button onClick={() => openpopup(index.uid)}>Créer une sortie</button>
     <div id={index.uid} className="pop" hidden>
-      <form action="http://localhost:8000/createSortie" method="POST">
+
+    <iframe name="dummyframe" id="dummyframe" hidden></iframe>
+      <form action="http://localhost:8000/createSortie" method="POST" target="dummyframe">
         <label>Nom de la sortie :</label>
         <input type='text' name='nom_sortie' className="form" required></input>
 
-        <label for="pet-select">visibility:</label>
+        <label for="visibility-select">visibility:</label>
         <select name="visibility" className="form" required>
           <option value="" disabled>--Choisissez la confidentialité--</option>
           <option value="publique">Publique</option>
@@ -112,10 +119,8 @@ function HomePage() {
         </select>
 
         <input name="id_events" value={index.uid} hidden></input>
-        {/* <input name="id_creator" value={}></input> */}
 
-
-        <input type="submit" value="Créer la sortie" />
+        <input type="submit" value="Créer la sortie" onClick={() => closepopup(index.uid)} />
       </form>
     </div>
   </div>

@@ -8,21 +8,23 @@ use Illuminate\Http\Request;
 // use Auth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-// string $name_sortie, int $id_creator, int $id_events, string $visibility
-// $_POST[''],,
+use Illuminate\Support\Facades\DB;
+
 class CreateSortieController extends Controller
 {
     public function CreateSortie()
     {
+        // $user = Auth::user();
+
+
         $name_sortie = $_POST['nom_sortie'];
-        $id_creator = Auth::user();
+        // $id_creator = Auth::getUser();
+        $id_creator = 3;
         $id_events = $_POST['id_events'];
         $visibility = $_POST['visibility'];
 
-
-        echo $name_sortie . '<br>';
-        echo $id_creator. '<br>';
-        echo $id_events. '<br>';
-        echo $visibility. '<br>';
+        $users = DB::insert("INSERT INTO sorties (name_sortie, id_creator, id_events, visibility) VALUES ('$name_sortie', $id_creator, $id_events, '$visibility');");
+ 
+        // redirect()
     }
 }
