@@ -88,9 +88,6 @@ function HomePage() {
   <option value="concert">concert</option>
   <option value="expo">expo</option>
   <option value="conférence">conférence</option>
-  {/* <option value="parrot">Parrot</option>
-  <option value="spider">Spider</option>
-  <option value="goldfish">Goldfish</option> */}
 </select>
 <div className='center'>
 
