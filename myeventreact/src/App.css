@@ -60,3 +60,11 @@
 .friends{
  display: none;
 }
+
+#det {
+  position: fixed;
+  top: 0;
+  background-color: gray;
+  width: 100%; 
+  z-index: 999; 
+}

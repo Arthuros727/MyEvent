@@ -3,6 +3,7 @@ import { useCookies } from 'react-cookie';
 
 function HomePage() {
   const [count, setCount] = useState([]);
+  const [details, setDetails] = useState([]);
   const [input, setInput] = useState("");
   const [select, setSelect] = useState("");
    const [user, setUser] = useState([]);
@@ -12,7 +13,7 @@ function HomePage() {
   }
 
   useEffect(() => {
-     fetch("https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=slug%2C%20thumbnail%2C%20location_city%2C%20description_fr&limit=20")
+     fetch("https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=uid%2C%20slug%2C%20thumbnail%2C%20location_name%2C%20description_fr%2C%20longdescription_fr&limit=20")
     .then(response => response.json())
     .then(response =>{
       console.log("ouiiiii",response.results  )
@@ -83,6 +84,25 @@ function HomePage() {
     
   }
 
+  function disp(uid){
+    
+    fetch(`https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/evenements-publics-openagenda/records?select=uid%2C%20slug%2C%20thumbnail%2C%20location_name%2C%20description_fr%2C%20longdescription_fr&where=uid%3D${uid}&limit=20`)
+    .then(response => response.json())
+    .then(response =>{
+      console.log("ouiiiii",response.results  )
+      setDetails(response.results)
+    } )
+    
+    // document.getElementById("det").style.display="block"
+
+  }
+
+  function hide(){
+    // document.getElementById("det").style.display="none"
+    setDetails([]);
+    console.log("oui")
+  }
+
   return (
 <>
 <div className='google' id='google'>
@@ -119,9 +139,17 @@ function HomePage() {
     ))}
 </div>
   
-
+{details.map((index) => (
+  <div className="details" id="det">
+    <button onClick={()=> hide()}>x</button>
+  <p>event : {index.slug}</p>
+    <img src={index.thumbnail}></img>
+    <div dangerouslySetInnerHTML={{__html: index.longdescription_fr}} />    
+    <button>ADD</button>
+  </div>
+))}
 {count.map((index) => (
-  <div className='map'>
+  <div className='map' onClick={()=>disp(index.uid)}>
 
     <p>event : {index.slug}</p>
     <img src={index.thumbnail}></img>

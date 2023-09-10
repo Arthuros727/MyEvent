@@ -25,7 +25,7 @@ class GitHubController extends Controller
       
                 Auth::login($searchUser);
      
-                return redirect('/dashboard');
+                return redirect('http://localhost:3000/');
       
             }else{
                 $gitUser = User::create([
