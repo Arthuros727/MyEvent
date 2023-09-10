@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SortieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,7 @@ Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
 Route::get('test', [UserController::class, 'getuser']);
 Route::get('friend/{id}', [UserController::class, 'addfriend']);
 Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
+Route::get('/addsortie/{uid}/{participant}/{private}', [SortieController::class, 'add']);
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

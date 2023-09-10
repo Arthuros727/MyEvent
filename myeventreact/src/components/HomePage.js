@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
+import SortieForm from "./SortieForm";
 
 function HomePage() {
   const [count, setCount] = useState([]);
@@ -103,6 +104,34 @@ function HomePage() {
     console.log("oui")
   }
 
+  function ajouterSortie(a) {
+    // Les données que vous souhaitez envoyer à Laravel
+    // const data = {
+    //   uid: 'valeur_uid',
+    //   creator: 'valeur_creator',
+    //   participant: 'valeur_participant',
+    //   private: 'valeur_private',
+    // };
+  
+    // Effectuer la requête GET vers Laravel
+    // window.location.href ='http://127.0.0.1:8000/addsortie';
+    fetch(`http://127.0.0.1:8000/addsortie/${a}`)
+     
+      .then(response => {
+        if (response.ok) {
+          // La requête s'est bien passée, vous pouvez gérer la réponse ici
+          console.log('Données ajoutées avec succès.');
+        } else {
+          // Gérer les erreurs de la requête ici
+          console.error('Erreur lors de l\'ajout des données.');
+        }
+      })
+      .catch(error => {
+        // Gérer les erreurs réseau ici
+        console.error('Erreur réseau :', error);
+      });
+  }
+
   return (
 <>
 <div className='google' id='google'>
@@ -145,7 +174,9 @@ function HomePage() {
   <p>event : {index.slug}</p>
     <img src={index.thumbnail}></img>
     <div dangerouslySetInnerHTML={{__html: index.longdescription_fr}} />    
-    <button>ADD</button>
+    {/* <SortieForm></SortieForm> */}
+    <button onClick={()=>ajouterSortie($index.uid)}>ADD</button>
+    <button>Show</button>
   </div>
 ))}
 {count.map((index) => (
